@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Общая сводка: Темная тема с анимированным переключателем</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    h1, h2 {
+      color: #0277bd;
+    }
+    
+    .summary-container {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+    }
+    
+    .summary-item {
+      margin-bottom: 20px;
+    }
+    
+    .summary-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #0277bd;
+    }
+    
+    .summary-content {
+      margin-left: 20px;
+    }
+    
+    .code-preview {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 10px 0;
+      font-family: monospace;
+      white-space: pre;
+      overflow-x: auto;
+      font-size: 0.9em;
+    }
+    
+    .final-demo {
+      margin-top: 40px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      text-align: center;
+    }
+    
+    /* Стили для финальной демонстрации */
+    :root {
+      --bg: #fff;
+      --text: #111;
+    }
+    
+    .demo-container {
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s ease;
+      padding: 20px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      position: relative;
+      min-height: 200px;
+    }
+    
+    .demo-container.dark {
+      --bg: #111;
+      --text: #eee;
+      border-color: #555;
+    }
+    
+    /* Стили для тумблера */
+    .switch {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+    
+    .switch input {
+      display: none;
+    }
+    
+    .slider {
+      width: 50px;
+      height: 24px;
+      background: #ccc;
+      border-radius: 50px;
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+    }
+    
+    .slider::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    
+    input:checked + .slider {
+      background: #2196F3;
+    }
+    
+    input:checked + .slider::before {
+      transform: translateX(26px);
+    }
+    
+    .demo-content {
+      padding-top: 30px;
+      text-align: center;
+    }
+    
+    .code-tabs {
+      display: flex;
+      margin-bottom: -1px;
+    }
+    
+    .code-tab {
+      padding: 10px 20px;
+      background-color: #e0e0e0;
+      border: 1px solid #ddd;
+      border-bottom: none;
+      border-radius: 5px 5px 0 0;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+    
+    .code-tab.active {
+      background-color: #f9f9f9;
+      border-bottom: 1px solid #f9f9f9;
+    }
+    
+    .code-panel {
+      display: none;
+    }
+    
+    .code-panel.active {
+      display: block;
+    }
+    
+    .full-code-container {
+      border: 1px solid #ddd;
+      border-radius: 0 5px 5px 5px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <h1>Общая сводка: Темная тема с анимированным переключателем</h1>
+  
+  <div class="summary-container">
+    <div class="summary-item">
+      <div class="summary-title">🎯 Цель:</div>
+      <div class="summary-content">
+        Создать простой и элегантный переключатель тёмной темы с плавной сменой цветов и запоминанием в браузере (через localStorage).
+      </div>
+    </div>
+    
+    <div class="summary-item">
+      <div class="summary-title">📌 Общая сводка:</div>
+      <div class="summary-content">
+        <ul>
+          <li>5 слайдов = 5 логичных этапов</li>
+          <li>Код — не более 12 строк на слайд</li>
+          <li>В каждом слайде: короткий код + пояснение + визуализация</li>
+          <li>Эффект реально применим, смотрится современно и стильно</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="summary-item">
+      <div class="summary-title">🗂 Структура слайдов:</div>
+      <div class="summary-content">
+        <ol>
+          <li><strong>Слайд 1:</strong> Что получится (демонстрация конечного результата)</li>
+          <li><strong>Слайд 2:</strong> HTML-код и структура</li>
+          <li><strong>Слайд 3:</strong> CSS (переменные и стилизация темы)</li>
+          <li><strong>Слайд 4:</strong> CSS (оформление тумблера)</li>
+          <li><strong>Слайд 5:</strong> JavaScript (логика и память)</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  
+  <div class="final-demo">
+    <h2>Финальная демонстрация</h2>
+    
+    <div class="code-tabs">
+      <div class="code-tab active" data-tab="html">HTML</div>
+      <div class="code-tab" data-tab="css">CSS</div>
+      <div class="code-tab" data-tab="js">JavaScript</div>
+    </div>
+    
+    <div class="full-code-container">
+      <div class="code-panel active" id="html-panel">
+        <div class="code-preview">
+&lt;label class="switch"&gt;
+  &lt;input type="checkbox" id="themeToggle"&gt;
+  &lt;span class="slider"&gt;&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;h1&gt;Тёмная тема&lt;/h1&gt;
+&lt;p&gt;Нажмите переключатель вверху&lt;/p&gt;
+        </div>
+      </div>
+      
+      <div class="code-panel" id="css-panel">
+        <div class="code-preview">
+:root {
+  --bg: #fff;
+  --text: #111;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.3s ease;
+}
+
+body.dark {
+  --bg: #111;
+  --text: #eee;
+}
+
+.switch {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+input {
+  display: none;
+}
+.slider {
+  width: 50px;
+  height: 24px;
+  background: gray;
+  border-radius: 50px;
+  position: relative;
+  cursor: pointer;
+}
+.slider::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+        </div>
+      </div>
+      
+      <div class="code-panel" id="js-panel">
+        <div class="code-preview">
+const toggle = document.getElementById('themeToggle');
+const body = document.body;
+
+toggle.addEventListener('change', () => {
+  body.classList.toggle('dark');
+  localStorage.setItem('theme',
+    body.classList.contains('dark') ? 'dark' : 'light');
+});
+
+if (localStorage.getItem('theme') === 'dark') {
+  body.classList.add('dark');
+  toggle.checked = true;
+}
+        </div>
+      </div>
+    </div>
+    
+    <div class="demo-container" id="demoContainer">
+      <label class="switch">
+        <input type="checkbox" id="themeToggle">
+        <span class="slider"></span>
+      </label>
+      
+      <div class="demo-content">
+        <h1>Тёмная тема</h1>
+        <p>Нажмите переключатель в правом верхнем углу</p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Переключение вкладок с кодом
+    const tabs = document.querySelectorAll('.code-tab');
+    const panels = document.querySelectorAll('.code-panel');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Удаляем активный класс со всех вкладок и панелей
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        
+        // Добавляем активный класс к выбранной вкладке
+        tab.classList.add('active');
+        
+        // Активируем соответствующую панель
+        const tabId = tab.getAttribute('data-tab');
+        document.getElementById(`${tabId}-panel`).classList.add('active');
+      });
+    });
+    
+    // Функционал переключения темы
+    const toggle = document.getElementById('themeToggle');
+    const demoContainer = document.getElementById('demoContainer');
+    
+    toggle.addEventListener('change', () => {
+      demoContainer.classList.toggle('dark');
+      localStorage.setItem('demo-theme', 
+        demoContainer.classList.contains('dark') ? 'dark' : 'light');
+    });
+    
+    if (localStorage.getItem('demo-theme') === 'dark') {
+      demoContainer.classList.add('dark');
+      toggle.checked = true;
+    }
+  </script>
+</body>
+</html>
